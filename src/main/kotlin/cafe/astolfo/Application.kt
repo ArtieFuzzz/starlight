@@ -23,7 +23,7 @@ fun main(): Unit = runBlocking {
                     s3.populateCache()
                 }
             }
-        }, 0, 1000) // * 60 * 60 * 12
+        }, 0, 1000 * 60 * 60 * 12)
 
 
     embeddedServer(Netty, port = 8080, host = "0.0.0.0", module = Application::module)

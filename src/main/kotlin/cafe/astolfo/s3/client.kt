@@ -6,7 +6,7 @@ import aws.smithy.kotlin.runtime.net.Url
 
 class R2Client {
     private var client: S3Client? = null
-    private var cache: ArrayList<String> = arrayListOf()
+    companion object var cache: ArrayList<String> = arrayListOf()
 
     // Always run this function before executing any other function such as `populateCache`
     // or `getRandom`
@@ -29,12 +29,19 @@ class R2Client {
         }
     }
 
-    fun getRandom(): String? {
+    fun getRandom(alternative: Boolean = false): String? {
         return if (cache.isNotEmpty()) {
-            val baseUrl = System.getenv("STARLIGHT_IMG_ENDPOINT")
+            var baseUrl = System.getenv("STARLIGHT_IMG_ENDPOINT")
             val image = cache.random()
 
-            return "$baseUrl/$image"
+            // Why not?
+            return if (alternative && System.getenv("STARLIGHT_ALT_IMG_ENDPOINT").isNotEmpty()
+            ) {
+                baseUrl = System.getenv("STARLIGHT_ALT_IMG_ENDPOINT")
+                "$baseUrl/$image"
+            } else {
+                "$baseUrl/$image"
+            }
         } else {
             null
         }
