@@ -12,7 +12,7 @@ class R2Client {
     // or `getRandom`
     suspend fun start() {
         this.client = S3Client.fromEnvironment {
-            region = System.getenv("STARLIGHT_S3_REGION") ?: "Region"; endpointUrl =
+            region = System.getenv("STARLIGHT_S3_REGION") ?: "auto"; endpointUrl =
             Url.parse(System.getenv("STARLIGHT_S3_URL"))
         }
     }
@@ -31,7 +31,10 @@ class R2Client {
 
     fun getRandom(): String? {
         return if (cache.isNotEmpty()) {
-            cache.random()
+            val baseUrl = System.getenv("STARLIGHT_IMG_ENDPOINT")
+            val image = cache.random()
+
+            return "$baseUrl/$image"
         } else {
             null
         }
