@@ -11,29 +11,28 @@ import java.util.Timer
 import java.util.TimerTask
 
 fun main(): Unit = runBlocking {
-    val s3 = R2Client()
-    s3.start()
-    s3.populateCache()
-
-        Timer().scheduleAtFixedRate(object : TimerTask() {
-            override fun run() {
-                println("Cache Updated!")
-                return runBlocking {
-                    println(s3.getRandom())
-                    s3.populateCache()
-                }
-            }
-        }, 0, 1000 * 60 * 60 * 12)
-
-
     embeddedServer(Netty, port = 8080, host = "0.0.0.0", module = Application::module)
         .start(wait = true)
 }
 
-fun Application.module() {
+fun Application.module() = runBlocking {
+    val s3 = R2Client()
+    s3.start()
+    s3.populateCache()
+
+    Timer().scheduleAtFixedRate(object : TimerTask() {
+        override fun run() {
+            println("Cache Updated!")
+            return runBlocking {
+                println(s3.getRandom())
+                s3.populateCache()
+            }
+        }
+    }, 0, 1000 * 60 * 60 * 12)
+
     configureSerialization()
     configureMonitoring()
     configureHTTP()
     configureSecurity()
-    configureRouting()
+    configureRouting(s3)
 }

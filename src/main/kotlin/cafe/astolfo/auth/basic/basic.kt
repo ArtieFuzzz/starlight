@@ -1,13 +1,13 @@
-package cafe.astolfo.auth
+package cafe.astolfo.auth.basic
 
-import java.util.Base64
+import java.util.*
 
 /**
  * Validate credentials
  *
  * @return Boolean
  */
-fun validateAndDecode(authorization: String): Boolean {
+fun verify(authorization: String): Boolean {
     val decoded = String(Base64.getUrlDecoder().decode(authorization.toByteArray()))
     println(decoded)
     val credentials = System.getenv("STARLIGHT_CREDENTIALS")
