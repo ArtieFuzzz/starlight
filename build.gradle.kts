@@ -5,11 +5,11 @@ val logback_version: String by project
 plugins {
     kotlin("jvm") version "1.8.22"
     id("io.ktor.plugin") version "2.3.1"
-                id("org.jetbrains.kotlin.plugin.serialization") version "1.8.22"
+    id("org.jetbrains.kotlin.plugin.serialization") version "1.8.22"
 }
 
 group = "cafe.astolfo"
-version = "0.0.1"
+version = "0.2.0"
 application {
     mainClass.set("cafe.astolfo.ApplicationKt")
 

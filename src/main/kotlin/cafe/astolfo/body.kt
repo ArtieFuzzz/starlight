@@ -1,7 +1,5 @@
 package cafe.astolfo
 
-import io.ktor.http.*
-import kotlinx.serialization.Contextual
 import kotlinx.serialization.Serializable
 
 @Serializable

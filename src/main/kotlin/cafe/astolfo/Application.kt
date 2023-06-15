@@ -1,14 +1,12 @@
 package cafe.astolfo
 
+import cafe.astolfo.plugins.*
+import cafe.astolfo.s3.R2Client
 import io.ktor.server.application.*
 import io.ktor.server.engine.*
 import io.ktor.server.netty.*
-import cafe.astolfo.plugins.*
 import kotlinx.coroutines.runBlocking
-import cafe.astolfo.s3.R2Client
-import kotlinx.coroutines.launch
-import java.util.Timer
-import java.util.TimerTask
+import java.util.*
 
 fun main(): Unit = runBlocking {
     embeddedServer(Netty, port = 8080, host = "0.0.0.0", module = Application::module)
@@ -24,7 +22,6 @@ fun Application.module() = runBlocking {
         override fun run() {
             println("Cache Updated!")
             return runBlocking {
-                println(s3.getRandom())
                 s3.populateCache()
             }
         }

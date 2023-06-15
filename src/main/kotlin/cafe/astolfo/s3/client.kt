@@ -1,7 +1,7 @@
 package cafe.astolfo.s3
 
-import aws.sdk.kotlin.services.s3.*
-import aws.sdk.kotlin.services.s3.model.*
+import aws.sdk.kotlin.services.s3.S3Client
+import aws.sdk.kotlin.services.s3.model.ListObjectsRequest
 import aws.smithy.kotlin.runtime.net.Url
 
 class R2Client {
