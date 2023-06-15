@@ -9,9 +9,7 @@ import java.util.*
  */
 fun verify(authorization: String): Boolean {
     val decoded = String(Base64.getUrlDecoder().decode(authorization.toByteArray()))
-    println(decoded)
     val credentials = System.getenv("STARLIGHT_CREDENTIALS")
-    println(credentials)
 
     return decoded == credentials
 }

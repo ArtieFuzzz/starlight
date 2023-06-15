@@ -12,7 +12,6 @@ import java.util.*
 fun signToken(): String {
     val jwtAudience = System.getenv("STARLIGHT_JWT_AUDIENCE")
     val jwtDomain = System.getenv("STARLIGHT_JWT_DOMAIN")
-    // val jwtRealm = System.getenv("STARLIGHT_JWT_REALM")
     val jwtSecret = System.getenv("STARLIGHT_JWT_SECRET")
 
     return with(JWT.create()) {

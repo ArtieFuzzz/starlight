@@ -20,8 +20,8 @@ fun Application.configureRouting(r2: R2Client) {
         }
     }
     routing {
-        MainRoute()
-        ImagesRoute(r2)
-        AuthorizationRoute()
+        mainRoute()
+        imagesRoute(r2)
+        authorizationRoute()
     }
 }

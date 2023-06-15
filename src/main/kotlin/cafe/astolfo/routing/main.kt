@@ -1,11 +1,18 @@
 package cafe.astolfo.routing
 
+import cafe.astolfo.MessagePayload
+import io.ktor.http.*
 import io.ktor.server.application.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
 
-fun Route.MainRoute() {
+fun Route.mainRoute() {
     get("/") {
-        call.respondText("Hello World!")
+        call.respond(
+            MessagePayload(
+                "Welcome to Starlight! Checkout the repo at @ github.com/ArtieFuzzz/starlight",
+                HttpStatusCode.OK.value
+            )
+        )
     }
 }

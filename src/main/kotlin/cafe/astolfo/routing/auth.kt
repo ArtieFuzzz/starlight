@@ -9,11 +9,10 @@ import io.ktor.server.application.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
 
-fun Route.AuthorizationRoute() {
+fun Route.authorizationRoute() {
     post("/token") {
         var authHeader: String = call.request.headers["Authorization"] ?: ""
         authHeader = authHeader.split(" ")[1]
-        println(authHeader)
 
         if (authHeader.isEmpty()) {
             call.respond(
