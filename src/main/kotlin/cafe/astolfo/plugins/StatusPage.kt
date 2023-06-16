@@ -30,7 +30,7 @@ fun Application.configureStatusPages() {
         status(HttpStatusCode.Processing) { call, status ->
             call.respond(status = status, MessagePayload("Processing, hold up", status.value))
         }
-        status(HttpStatusCode.UnprocessableEntity ){ call, status ->
+        status(HttpStatusCode.UnprocessableEntity) { call, status ->
             call.respond(status = status, MessagePayload("Unprocessable", status.value))
         }
     }

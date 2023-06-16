@@ -3,7 +3,6 @@ package cafe.astolfo.auth.jwt
 import com.auth0.jwk.JwkProviderBuilder
 import com.auth0.jwt.JWT
 import com.auth0.jwt.algorithms.Algorithm
-import com.auth0.jwt.interfaces.ECDSAKeyProvider
 import java.security.KeyFactory
 import java.security.interfaces.ECPrivateKey
 import java.security.interfaces.ECPublicKey
@@ -29,7 +28,7 @@ fun signToken(username: String): String {
     val keySpecPKCS8 = PKCS8EncodedKeySpec(Base64.getDecoder().decode(privateKeyString))
     val publicKey = jwkProvider.get(publicKeyString).publicKey
     val privateKey = KeyFactory.getInstance("EC").generatePrivate(keySpecPKCS8)
-    
+
 
     return with(JWT.create()) {
         withAudience(jwtAudience)
