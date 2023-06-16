@@ -11,6 +11,7 @@ import io.ktor.server.routing.*
 
 fun Route.authorizationRoute() {
     post("/token") {
+        val username = call.request.queryParameters["username"] ?: call.request.queryParameters["user"] ?: "some-user"
         var authHeader: String = call.request.headers["Authorization"] ?: ""
         authHeader = authHeader.split(" ")[1]
 
@@ -22,7 +23,7 @@ fun Route.authorizationRoute() {
         }
 
         if (verify(authHeader)) {
-            val token = signToken()
+            val token = signToken(username)
 
             call.respond(AuthorizationPayload(token))
         } else {
