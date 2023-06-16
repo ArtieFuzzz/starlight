@@ -36,5 +36,6 @@ fun Application.module() = runBlocking {
     configureMonitoring()
     configureHTTP()
     configureSecurity()
+    configureStatusPages()
     configureRouting(s3)
 }

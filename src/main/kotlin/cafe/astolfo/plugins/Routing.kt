@@ -12,18 +12,6 @@ import io.ktor.server.response.*
 import io.ktor.server.routing.*
 
 fun Application.configureRouting(r2: R2Client) {
-    install(StatusPages) {
-        exception<Throwable> { call, cause ->
-            call.respondText(
-                text = "500: $cause\n\nPlease report this error to `hey@astolfo.cafe`",
-                status = HttpStatusCode.InternalServerError
-            )
-        }
-
-        status(HttpStatusCode.NotFound) { call, status ->
-            call.respond(status = status, MessagePayload("Route not found", status.value))
-        }
-    }
     routing {
         mainRoute()
         imagesRoute(r2)
